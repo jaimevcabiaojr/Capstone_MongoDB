@@ -25,7 +25,7 @@ const getUser = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { name, cellphone, email, brand , itemtype,issue, remarks ,status1} = req.body;
+  const { name, cellphone, email, brand , itemtype,issue, remarks ,status1, password} = req.body;
 
   try {
     
@@ -38,6 +38,7 @@ const createUser = async (req, res) => {
       issue: issue,
       remarks: remarks,
       status1: status1,
+      password: password,
     });
 
     if (user) {
@@ -51,7 +52,7 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const { id, name, cellphone, email, brand, itemtype ,remarks,status1, } = req.body;
+  const { id, name, cellphone, email, brand, itemtype ,remarks,status1,password, } = req.body;
 
    try {
     const user = await User.findById(id);
@@ -62,6 +63,7 @@ const updateUser = async (req, res) => {
     user.itemtype = itemtype;
     user.remarks = remarks;
     user.status1 = status1;
+    user.password = password;
     await user.save();
 
     res.status(200).json({ msg: "Data updated successfully" });
